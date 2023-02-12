@@ -1,5 +1,5 @@
 {
-  "name": "example-i18n",
+  "name": "example-nextjs-i18n",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,9 +15,12 @@
     "@types/react-dom": "18.0.10",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
+    "i18next": "22.4.9",
     "next": "13.1.6",
+    "next-i18next": "13.1.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-i18next": "12.1.5",
     "typescript": "4.9.5"
   }
 }
