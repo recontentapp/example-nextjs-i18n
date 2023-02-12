@@ -1,3 +1,5 @@
 {
-  "description": "Hello"
+  "homepage": {
+    "title": "Welcome to the homepage"
+  }
 }

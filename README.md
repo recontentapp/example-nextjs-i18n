@@ -1,38 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# I18n in a Next.js app
 
-## Getting Started
+> Looking for a way to streamline collaboration with designers & product managers on content? Tired of making PRs to fix typos in JSON files? Checkout [Recontent.app](https://recontent.app?utm_source=github) to ship localized content faster.
 
-First, run the development server:
+## Installation
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```sh
+git clone git@github.com:recontentapp/example-nextjs-i18n.git
+
+cd example-nextjs-i18n
+
+yarn
+
+yarn start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Adding translations
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Translations are stored in JSON files in the `public/locales` folder. Each piece of content needs to be referenced in all supported locales.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The `t` function is typed to prevent using unknown paths within a locale file. The `en/default.json` file is used as a reference of available paths.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Adding new languages
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Update the `locales` array in the `next-i18next.config.js` config file
+2. Add a new JSON file in the `public/locales` folder which matches the added locale name
+3. You can now switch your app in that locale
 
-## Learn More
+## Testing components which rely on translations
 
-To learn more about Next.js, take a look at the following resources:
+You can find an example of such test in `__tests__/index.spec.tsx`.
+As `i18next` is not set up in the test environment, make sure to update mocks declared `src/setupTests.ts` if you rely on new functions/logic from `i18next` or `react-i18next`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Lazy-loading translations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Translations files tend to grow exponentially as you add new features to your app.
+Instead of relying on a single `i18next` [namespace](https://react.i18next.com/guides/multiple-translation-files) which contains all your translations, you can split them in smaller files based on routes (eg. Dashboard) or areas of your app (eg. Admin panel, Public view).
